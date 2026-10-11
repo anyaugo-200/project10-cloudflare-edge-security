@@ -1,0 +1,13 @@
+{
+  "_comment": "Project 10 - Cloudflare edge CONFIG backup (off-platform). The edge data-plane is stateless, so the asset we protect and recover is the CONFIGURATION. Restore a rule by recreating it in the dashboard: Security > WAF > Custom rules > Create rule, pasting the expression below.",
+  "zone": "anyaugo-drs.com",
+  "backed_up_utc": "2026-10-10",
+  "custom_rules": [
+    {
+      "name": "Block-SQLi-Patterns",
+      "phase": "http_request_firewall_custom",
+      "action": "block",
+      "expression": "lower(url_decode(http.request.uri.query)) contains \"union select\" or lower(url_decode(http.request.uri.query)) contains \"' or 1=1\" or lower(url_decode(http.request.uri.query)) contains \"'--\" or lower(url_decode(http.request.uri.query)) contains \"sleep(\""
+    }
+  ]
+}
